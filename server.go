@@ -20,8 +20,8 @@ func NewServer() *negroni.Negroni {
 }
 
 func initRoutes(mx *mux.Router) {
-	http.Handle("/images/", http.StripPrefix("/images/", http.FileServer(http.Dir("assets/images"))))
-	http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("assets/css"))))
+	mx.PathPrefix("/images/").Handler(http.StripPrefix("/images/", http.FileServer(http.Dir("./assets/images/"))))
+	mx.PathPrefix("/css/").Handler(http.StripPrefix("/css/", http.FileServer(http.Dir("./assets/css/"))))
 	mx.HandleFunc("/", homeHandler)
 }
 
