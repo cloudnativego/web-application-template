@@ -30,8 +30,13 @@ type sampleContent struct {
 	Content string `json:"content"`
 }
 
+var t *template.Template
+
+func init() {
+	t = template.Must(template.ParseFiles("assets/templates/index.html"))
+}
+
 func homeHandler(w http.ResponseWriter, req *http.Request) {
 	data := sampleContent{ID: "8675309", Content: "Hello from Go!"}
-	t := template.Must(template.ParseFiles("assets/index.html"))
 	t.Execute(w, data)
 }
